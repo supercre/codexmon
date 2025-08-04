@@ -1,0 +1,57 @@
+openapi: 3.1.0
+info:
+  title: Codex 플러그인 API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8000
+paths:
+  /instructions:
+    get:
+      summary: 사용법 가져오기
+      responses:
+        '200':
+          description: 사용법 반환
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instructions:
+                    type: array
+                    items:
+                      type: string
+  /execute:
+    post:
+      summary: Codex 명령 실행
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+      responses:
+        '200':
+            description: 명령 실행 결과
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  output:
+                    type: string
+  /legal:
+    get:
+      summary: 법적 정보
+      responses:
+        '200':
+            description: 법적 고지
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
