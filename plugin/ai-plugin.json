@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Codex 플러그인",
+  "name_for_model": "codex_plugin",
+  "description_for_human": "OpenAPI 엔드포인트를 통해 Codex와 상호 작용합니다.",
+  "description_for_model": "Provides endpoints to run simple Codex commands.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:8000/openapi.yaml"
+  },
+  "logo_url": "http://localhost:8000/logo.png",
+  "contact_email": "support@example.com",
+  "legal_info_url": "http://localhost:8000/legal"
+}

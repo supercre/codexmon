@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Codex 플러그인 GUI</title>
+</head>
+<body>
+    <h1>Codex 플러그인 GUI</h1>
+
+    <section>
+        <h2>사용법</h2>
+        <button onclick="loadInstructions()">사용법 불러오기</button>
+        <ul id="instructions"></ul>
+    </section>
+
+    <section>
+        <h2>명령 실행</h2>
+        <input type="text" id="command" placeholder="codex 명령" />
+        <button onclick="executeCommand()">실행</button>
+        <pre id="output"></pre>
+    </section>
+
+    <script>
+    async function loadInstructions() {
+        const resp = await fetch('/instructions');
+        const data = await resp.json();
+        const list = document.getElementById('instructions');
+        list.innerHTML = '';
+        (data.instructions || []).forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            list.appendChild(li);
+        });
+    }
+
+    async function executeCommand() {
+        const cmd = document.getElementById('command').value;
+        const resp = await fetch('/execute', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({command: cmd})
+        });
+        const data = await resp.json();
+        document.getElementById('output').textContent = data.output || '결과 없음';
+    }
+    </script>
+</body>
+</html>
